@@ -15,6 +15,8 @@
 #include "hitable_list.h"
 #include "camera.h"
 #include "material.h"
+#include "moving_sphere.h"
+#include "bvh_node.h"
 //float hit_sphere(const vec3& center, float radius, const ray& r){
 //    vec3 oc = r.origin() - center;
 //    float a = dot(r.direction(), r.direction());
@@ -90,7 +92,8 @@ hitable *random_scene(){
             vec3 center(a + 0.9*drand48(), 0.2, b + drand48());
             if ((center - vec3(4, 0.2, 0)).length() > 0.9){
                 if (choose_mat < 0.8){
-                    list[i++] = new sphere(center, 0.2, new lambertian(vec3(drand48()*drand48(), drand48()*drand48(), drand48()*drand48())));
+//                    list[i++] = new sphere(center, 0.2, new lambertian(vec3(drand48()*drand48(), drand48()*drand48(), drand48()*drand48())));
+                    list[i++] = new moving_sphere(center, center + vec3(0, 0.5*drand48(),0), 0, 1.0, 0.2, new lambertian(vec3(drand48()*drand48(), drand48()*drand48(), drand48()*drand48())));
                 }
                 else if (choose_mat < 0.95){
                     list[i++] = new sphere(center, 0.2, new metal(vec3(0.5 * (1 + drand48()), 0.5 * (1 + drand48()), 0.5 * (1 + drand48())), 0.5 * drand48()));
@@ -127,7 +130,7 @@ int main(int argc, const char * argv[]) {
     vec3 lookat = vec3(0,0,0);
     float dist_to_focus = 10;
     float aperture = 0.1;
-    camera cam(lookfrom, lookat, vec3(0, 1, 0), 20, float(nx)/float(ny), aperture, dist_to_focus);
+    camera cam(lookfrom, lookat, vec3(0, 1, 0), 20, float(nx)/float(ny), aperture, dist_to_focus, 0, 1.0);
     for (int j = ny-1; j >= 0; j--){
         for (int i = 0; i < nx; i++){
             vec3 col(0, 0, 0);

@@ -32,6 +32,9 @@
 		7A7EE6C9222ED97100E11C75 /* hitable_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hitable_list.h; sourceTree = "<group>"; };
 		7A7EE6CA2230225D00E11C75 /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		7A7EE6CB2232D77100E11C75 /* material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		7AED33EC224A9ABB000E8E61 /* moving_sphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = moving_sphere.h; sourceTree = "<group>"; };
+		7AED33ED22512682000E8E61 /* aabb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aabb.h; sourceTree = "<group>"; };
+		7AED33EE22527716000E8E61 /* bvh_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bvh_node.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,9 @@
 				7A7EE6C9222ED97100E11C75 /* hitable_list.h */,
 				7A7EE6CA2230225D00E11C75 /* camera.h */,
 				7A7EE6CB2232D77100E11C75 /* material.h */,
+				7AED33EC224A9ABB000E8E61 /* moving_sphere.h */,
+				7AED33ED22512682000E8E61 /* aabb.h */,
+				7AED33EE22527716000E8E61 /* bvh_node.h */,
 			);
 			path = rayTracing;
 			sourceTree = "<group>";
