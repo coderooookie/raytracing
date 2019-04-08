@@ -32,9 +32,11 @@
 		7A7EE6C9222ED97100E11C75 /* hitable_list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hitable_list.h; sourceTree = "<group>"; };
 		7A7EE6CA2230225D00E11C75 /* camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		7A7EE6CB2232D77100E11C75 /* material.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		7AA8C0CC225BAE2E008CFA1C /* perlin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = perlin.h; sourceTree = "<group>"; };
 		7AED33EC224A9ABB000E8E61 /* moving_sphere.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = moving_sphere.h; sourceTree = "<group>"; };
 		7AED33ED22512682000E8E61 /* aabb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aabb.h; sourceTree = "<group>"; };
 		7AED33EE22527716000E8E61 /* bvh_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bvh_node.h; sourceTree = "<group>"; };
+		7AED33EF2253C975000E8E61 /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,8 @@
 				7AED33EC224A9ABB000E8E61 /* moving_sphere.h */,
 				7AED33ED22512682000E8E61 /* aabb.h */,
 				7AED33EE22527716000E8E61 /* bvh_node.h */,
+				7AED33EF2253C975000E8E61 /* texture.h */,
+				7AA8C0CC225BAE2E008CFA1C /* perlin.h */,
 			);
 			path = rayTracing;
 			sourceTree = "<group>";
