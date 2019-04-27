@@ -2,8 +2,8 @@
 //  texture.h
 //  rayTracing
 //
-//  Created by 洪树斌 on 2019/4/3.
-//  Copyright © 2019 洪树斌. All rights reserved.
+//  Created by coderooookie on 2019/4/3.
+//  Copyright © 2019 coderooookie. All rights reserved.
 //
 
 #ifndef texture_h
@@ -43,10 +43,14 @@ public:
 
 class noise_texture : public texture{
 public:
-    noise_texture(){}
+    noise_texture(){scale = 1;}
+    noise_texture(float sc):scale(sc){}
     virtual vec3 value(float u, float v, const vec3& p) const{
-        return vec3(1,1,1) * noise.noise(p);
+//        return vec3(1,1,1) * noise.noise(p * scale);
+//        return vec3(1,1,1) * noise.turb(scale * p);
+        return vec3(1,1,1)*0.5*(1+sin(scale*p.z() + 10 * noise.turb(p)));
     }
     perlin noise;
+    float scale;
 };
 #endif /* texture_h */

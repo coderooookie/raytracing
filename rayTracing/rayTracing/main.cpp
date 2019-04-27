@@ -123,11 +123,44 @@ hitable* two_spheres(){
 }
 
 hitable* two_perlin_spheres(){
-    texture* pertext = new noise_texture();
+    texture* pertext = new noise_texture(15);
     hitable **list = new hitable*[2];
     list[0] = new sphere(vec3(0, -1000, 0), 1000, new lambertian(pertext));
     list[1] = new sphere(vec3(0, 2, 0), 2, new lambertian(pertext));
     return new bvh_node(list, 2, 0, 1);
+}
+
+pthread_mutex_t mutex1;
+const int sizeX = 1200;
+const int sizeY = 800;
+vec3 colorResult[sizeX*sizeY];
+struct thread_data {
+    int nx;
+    int ny;
+    int ns;
+    int i;
+    int j;
+    camera* cam;
+    hitable* world;
+};
+
+void* generateColor(void* threadArgs){
+    thread_data* threadData;
+    threadData = (thread_data*) threadArgs;
+    vec3 col(0,0,0);
+    for (int s=0; s <threadData->ns; s++){
+        float u = float(threadData->i + drand48())/threadData->nx;
+        float v = float(threadData->j + drand48())/threadData->ny;
+        ray r = threadData->cam->get_ray(u, v);
+        col += color(r, threadData->world, 0);
+    }
+    col /= float(threadData->ns);
+    col = vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
+    pthread_mutex_lock(&mutex1);
+//    std::cout << col << std::endl;
+    colorResult[(threadData->j) * (threadData->nx) + (threadData->i)] = col;
+    pthread_mutex_unlock(&mutex1);
+    pthread_exit(NULL);
 }
 
 int main(int argc, const char * argv[]) {
@@ -151,6 +184,7 @@ int main(int argc, const char * argv[]) {
     vec3 lookat = vec3(0,0,0);
     float dist_to_focus = 10;
     float aperture = 0.1;
+//    colorResult[10] = vec3(0,0,0);
     camera cam(lookfrom, lookat, vec3(0, 1, 0), 20, float(nx)/float(ny), aperture, dist_to_focus, 0, 1.0);
     for (int j = ny-1; j >= 0; j--){
         for (int i = 0; i < nx; i++){
@@ -170,6 +204,29 @@ int main(int argc, const char * argv[]) {
             outfile << ir << " " << ig << " " << ib << "\n";
         }
     }
+    //多线程方法
+//    pthread_t tids[nx*ny];
+//    for (int j = ny-1; j >= 0; j--){
+//        for (int i = 0; i < nx; i++){
+//            thread_data threadData = { nx,ny,ns,i,j,&cam,world};
+//            //            pthread_create(pthread_t  _Nullable * _Nonnull, const pthread_attr_t * _Nullable, void * _Nullable (* _Nonnull)(void * _Nullable), void * _Nullable)
+//            int ret = pthread_create(&tids[j*nx + i], NULL, generateColor, &threadData);
+//            if (ret != 0)
+//            {
+//                std::cout << "pthread_create error: error_code=" << ret << std::endl;
+//            }
+//        }
+//    }
+//    for (int j = ny-1; j >= 0; j--){
+//        for (int i = 0; i < nx; i++){
+//            //            vec3 p = r.point_at_parameter(2.0);
+//            int ir = int(255.99 * (colorResult[j*nx + i]).r());
+//            int ig = int(255.99 * (colorResult[j*nx + i]).g());
+//            int ib = int(255.99 * (colorResult[j*nx + i]).b());
+//            outfile << ir << " " << ig << " " << ib << "\n";
+//        }
+//    }
+    //
     outfile.close();
     return 0;
 }

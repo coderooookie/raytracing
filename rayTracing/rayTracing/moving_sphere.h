@@ -2,8 +2,8 @@
 //  moving_sphere.h
 //  rayTracing
 //
-//  Created by 洪树斌 on 2019/3/27.
-//  Copyright © 2019 洪树斌. All rights reserved.
+//  Created by coderooookie on 2019/3/27.
+//  Copyright © 2019 coderooookie. All rights reserved.
 //
 
 #ifndef moving_sphere_h
